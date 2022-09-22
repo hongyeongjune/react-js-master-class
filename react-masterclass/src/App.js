@@ -14,14 +14,24 @@ function App() {
   `;
   const Circle = styled(Box)`
     border-radius: 50px;
+  `;
+  const Input = styled.input.attrs({ required: true })`
+    background-color: tomato;
   `
 
   return (
     <Father>
-      <Box bgColor="teal">
-        <Hello>Hello</Hello>
-      </Box>
-      <Circle bgColor="tomato" />
+        <Box bgColor="teal">
+            <Hello>Hello</Hello>
+        </Box>
+        <Circle bgColor="tomato" />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
     </Father>
   );
 }
