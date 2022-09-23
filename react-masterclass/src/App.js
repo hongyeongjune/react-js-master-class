@@ -3,6 +3,10 @@ import styled, { keyframes } from 'styled-components';
 function App() {
   const Wrapper = styled.div`
     display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
   `;
   const Box = styled.div`
     background-color: ${props => props.bgColor};
@@ -31,6 +35,9 @@ function App() {
         border-radius: 0px;
     }
   `;
+  const Emoji = styled.span`
+    font-size: 36px;
+  `;
   const TomatoBox = styled.div`
     height: 200px;
     width: 200px;
@@ -39,33 +46,17 @@ function App() {
     justify-content: center;
     align-items: center;
     animation: ${animation} 1s linear infinite;
-    span {
-        font-size: 36px;
-        &:hover {
-        font-size: 48px;
-        }
-        &:active {
-        opacity: 0;
-        }
+    ${Emoji}:hover {
+        font-size: 98px;
     }
-  `
+  `;
 
   return (
     <Wrapper>
-        <Box bgColor="teal">
-            <Hello>Hello</Hello>
-        </Box>
-        <Circle bgColor="tomato" />
-        <Input />
-        <Input />
-        <Input />
-        <Input />
-        <Input />
-        <Input />
-        <Input />
         <TomatoBox>
-            <span>🤩</span>
+            <Emoji>🤩</Emoji>
         </TomatoBox>
+        <Emoji>⭐️</Emoji>
     </Wrapper>
   );
 }
