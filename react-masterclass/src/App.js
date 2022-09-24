@@ -7,6 +7,10 @@ function App() {
     width: 100vw;
     justify-content: center;
     align-items: center;
+    background-color: ${props => props.theme.backgroundColor}
+  `;
+  const Title = styled.h1`
+    color: ${props => props.theme.textColor};
   `;
   const Box = styled.div`
     background-color: ${props => props.bgColor};
@@ -57,6 +61,7 @@ function App() {
             <Emoji>🤩</Emoji>
         </TomatoBox>
         <Emoji>⭐️</Emoji>
+        <Title>Hello</Title>
     </Wrapper>
   );
 }
