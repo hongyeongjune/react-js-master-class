@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import Circle from './Circle';
 
 function App() {
   const Wrapper = styled.div`
@@ -13,16 +14,16 @@ function App() {
     color: ${props => props.theme.textColor};
   `;
   const Box = styled.div`
-    background-color: ${props => props.bgColor};
+    background-color: ${props => props.theme.backgroundColor};
     width: 100px;
     height: 100px;
   `;
   const Hello = styled.h1`
     color: white;
   `;
-  const Circle = styled(Box)`
-    border-radius: 50px;
-  `;
+  // const Circle = styled(Box)`
+  //   border-radius: 50px;
+  // `;
   const Input = styled.input.attrs({ required: true })`
     background-color: tomato;
   `;
@@ -56,13 +57,10 @@ function App() {
   `;
 
   return (
-    <Wrapper>
-        <TomatoBox>
-            <Emoji>🤩</Emoji>
-        </TomatoBox>
-        <Emoji>⭐️</Emoji>
-        <Title>Hello</Title>
-    </Wrapper>
+    <div>
+      <Circle backgroundColor="teal" />
+      <Circle backgroundColor="tomato" />
+    </div>
   );
 }
 
