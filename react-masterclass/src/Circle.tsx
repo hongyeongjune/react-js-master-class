@@ -20,7 +20,6 @@ const Container = styled.div<ContainerProps>`
 `;
 
 function Circle({ backgroundColor, borderColor }: CircleProps) {
-    const {value, setValue} = useState<string>();
     return (
         <Container backgroundColor={backgroundColor} borderColor={borderColor ?? backgroundColor} />
     );

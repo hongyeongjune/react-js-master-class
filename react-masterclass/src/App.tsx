@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import Circle from './Circle';
+import React, { useState } from 'react';
 
 function App() {
   const Wrapper = styled.div`
@@ -56,10 +57,29 @@ function App() {
     }
   `;
 
+  const [value, setValue] = useState<string>("");
+
+  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+  };
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("Hello, ", value);
+  }
+
   return (
     <div>
       <Circle backgroundColor="teal" borderColor="yellow" />
       <Circle backgroundColor="tomato" />
+      <form onSubmit={onSubmit}>
+        <input
+            value={value}
+            type="text"
+            placeholder="username"
+            onChange={onChange}
+        />
+      </form>
     </div>
   );
 }
