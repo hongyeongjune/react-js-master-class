@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div>
-      <Circle backgroundColor="teal" />
+      <Circle backgroundColor="teal" borderColor="yellow" />
       <Circle backgroundColor="tomato" />
     </div>
   );
