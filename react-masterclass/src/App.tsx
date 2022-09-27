@@ -56,6 +56,12 @@ function App() {
         font-size: 98px;
     }
   `;
+  const Container = styled.div`
+    background-color: ${props => props.theme.backgroundColor};
+  `
+  const H1 = styled.h1`
+    color: ${props => props.theme.textColor};
+  `
 
   const [value, setValue] = useState<string>("");
 
@@ -69,7 +75,7 @@ function App() {
   }
 
   return (
-    <div>
+    <Container>
       <Circle backgroundColor="teal" borderColor="yellow" />
       <Circle backgroundColor="tomato" />
       <form onSubmit={onSubmit}>
@@ -80,7 +86,8 @@ function App() {
             onChange={onChange}
         />
       </form>
-    </div>
+      <H1>Hello</H1>
+    </Container>
   );
 }
 
