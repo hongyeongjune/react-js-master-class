@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   padding: 0px 20px;
+  max-width: 480px;
+  margin: 0 auto;
 `;
 
 const Header = styled.header`
@@ -36,27 +39,53 @@ const Title = styled.h1`
   color: ${props => props.theme.accentColor};
 `;
 
+const Loader = styled.span`
+  text-align: center;
+  display: block;
+`;
+
+interface CoinsProps {
+    id: string;
+    name: string;
+    symbol: string;
+    rank: number;
+    is_new: boolean;
+    is_active: boolean;
+    type: string;
+}
+
 function Coins() {
-    const coins = [
-        {
-            id: "btc-button",
-            name: "name"
-        }
-    ];
+    const [coins, setCoins] = useState<CoinsProps[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const getCoins = async () => {
+        const resp = await (await fetch("https://api.coinpaprika.com/v1/coins")).json();
+        setCoins(resp.slice(0, 100));
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getCoins();
+    })
+
     return (
         <Container>
             <Header>
                 <Title>Coins</Title>
             </Header>
-            <CoinsList>
-                {
-                    coins.map((coin) => (
-                        <Coin key={coin.id}>
-                            <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
-                        </Coin>
-                    ))
-                }
-            </CoinsList>
+            {loading && <Loader>Loading...</Loader>
+            }
+            {!loading &&
+                <CoinsList>
+                    {
+                        coins.map((coin) => (
+                            <Coin key={coin.id}>
+                                <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+                            </Coin>
+                        ))
+                    }
+                </CoinsList>
+            }
         </Container>
     );
 }
