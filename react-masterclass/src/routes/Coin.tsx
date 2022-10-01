@@ -1,8 +1,6 @@
-import { useLocation, useParams, Outlet, useMatch, Link } from 'react-router-dom';
+import { Link, Outlet, useLocation, useMatch, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import Chart from './Chart';
-import Price from './Price';
 
 const Title = styled.h1`
   font-size: 48px;
