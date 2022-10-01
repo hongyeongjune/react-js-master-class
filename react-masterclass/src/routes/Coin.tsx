@@ -1,6 +1,8 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import Chart from './Chart';
+import Price from './Price';
 
 const Title = styled.h1`
   font-size: 48px;
@@ -23,6 +25,30 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Overview = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+`;
+
+const OverviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
+
+const Description = styled.p`
+  margin: 20px 0px;
 `;
 
 interface RouterStateProps {
@@ -96,17 +122,51 @@ function Coin() {
         const priceResp = await ( await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
         _setCoin(coinResp);
         _setPrice(priceResp);
+        setLoading(false);
     }
 
     useEffect(() => {
         setCoin();
-    }, []);
+    }, [coinId]);
 
     return (
         <Container>
             <Header>
-                <Title>{state?.name || "Loading..."}</Title>
+                <Title>{state?.name ? state.name : loading ? "Loading..." : coin?.name}</Title>
             </Header>
+            {loading &&
+                <Loader>Loading...</Loader>
+            }
+            {!loading &&
+                <>
+                    <Overview>
+                        <OverviewItem>
+                            <span>Rank:</span>
+                            <span>{coin?.rank}</span>
+                        </OverviewItem>
+                        <OverviewItem>
+                            <span>Symbol:</span>
+                            <span>${coin?.symbol}</span>
+                        </OverviewItem>
+                        <OverviewItem>
+                            <span>Open Source:</span>
+                            <span>{coin?.open_source ? "Yes" : "No"}</span>
+                        </OverviewItem>
+                    </Overview>
+                    <Description>{coin?.description}</Description>
+                    <Overview>
+                        <OverviewItem>
+                            <span>Total Supply:</span>
+                            <span>{price?.total_supply}</span>
+                        </OverviewItem>
+                        <OverviewItem>
+                            <span>Max Supply:</span>
+                            <span>{price?.max_supply}</span>
+                        </OverviewItem>
+                    </Overview>
+                    <Outlet />
+                </>
+            }
         </Container>
     );
 }
